@@ -130,6 +130,12 @@ export class Grid <T> {
 		return result;
 	}
 
+	public fill(value: T): void{
+		for(let i = 0; i < this.cells.length; i++){
+			this.cells[i] = value;
+		}
+	}
+
 	public getNeighbours(row: number, col:number): T[]{
 		const sRow = this.sanitizeRow(row);
 		const sCol = this.sanitizeCol(col);

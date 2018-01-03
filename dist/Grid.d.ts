@@ -17,6 +17,7 @@ export declare class Grid<T> {
     insert(value: T, row: number, col: number): void;
     getCols(): Array<Array<T>>;
     getRows(): Array<Array<T>>;
+    fill(value: T): void;
     getNeighbours(row: number, col: number): T[];
     toArray(): T[];
     static fromArray<T>(array: T[], rows: number, cols: number): Grid<T>;

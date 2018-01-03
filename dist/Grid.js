@@ -111,6 +111,11 @@ var Grid = /** @class */ (function () {
         }
         return result;
     };
+    Grid.prototype.fill = function (value) {
+        for (var i = 0; i < this.cells.length; i++) {
+            this.cells[i] = value;
+        }
+    };
     Grid.prototype.getNeighbours = function (row, col) {
         var sRow = this.sanitizeRow(row);
         var sCol = this.sanitizeCol(col);
