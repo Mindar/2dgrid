@@ -99,9 +99,11 @@ export class Grid <T> {
 		return this.cells[arrpos];
 	}
 
-	public isEmtpy(row: number, col: number): boolean{
-		if(this.valueAt(row, col) === undefined) return true;
-		return false;
+	public valueAtOrUndefined(row: number, col: number): T | undefined {
+		if(!this.isRowValid(row)) return undefined;
+		if(!this.isColValid(col)) return undefined;
+
+		return this.valueAt(row, col);
 	}
 
 	public insert(value: T, row: number, col: number): void{
@@ -126,6 +128,29 @@ export class Grid <T> {
 			result.push(this.getRow(i));
 		}
 		return result;
+	}
+
+	public getNeighbours(row: number, col:number): T[]{
+		const sRow = this.sanitizeRow(row);
+		const sCol = this.sanitizeCol(col);
+
+		const resultUnfiltered: any[] = [];
+
+		// Col left of cell
+		resultUnfiltered.push(this.valueAtOrUndefined(row + 1, col - 1));
+		resultUnfiltered.push(this.valueAtOrUndefined(row    , col - 1));
+		resultUnfiltered.push(this.valueAtOrUndefined(row - 1, col - 1));
+
+		// Col containing cell
+		resultUnfiltered.push(this.valueAtOrUndefined(row + 1, col));
+		resultUnfiltered.push(this.valueAtOrUndefined(row - 1, col));
+		
+		// Col right of cell
+		resultUnfiltered.push(this.valueAtOrUndefined(row + 1, col + 1));
+		resultUnfiltered.push(this.valueAtOrUndefined(row    , col + 1));
+		resultUnfiltered.push(this.valueAtOrUndefined(row - 1, col + 1));
+
+		return resultUnfiltered.filter((value) => (value !== undefined) ? true : false);
 	}
 
 	public toArray(): T[]{

@@ -13,10 +13,11 @@ export declare class Grid<T> {
     isRowValid(row: number): boolean;
     isColValid(col: number): boolean;
     valueAt(row: number, col: number): T;
-    isEmtpy(row: number, col: number): boolean;
+    valueAtOrUndefined(row: number, col: number): T | undefined;
     insert(value: T, row: number, col: number): void;
     getCols(): Array<Array<T>>;
     getRows(): Array<Array<T>>;
+    getNeighbours(row: number, col: number): T[];
     toArray(): T[];
     static fromArray<T>(array: T[], rows: number, cols: number): Grid<T>;
     wrapRows: boolean;

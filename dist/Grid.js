@@ -84,10 +84,12 @@ var Grid = /** @class */ (function () {
         var arrpos = this.arrayPosition(sRow, sCol);
         return this.cells[arrpos];
     };
-    Grid.prototype.isEmtpy = function (row, col) {
-        if (this.valueAt(row, col) === undefined)
-            return true;
-        return false;
+    Grid.prototype.valueAtOrUndefined = function (row, col) {
+        if (!this.isRowValid(row))
+            return undefined;
+        if (!this.isColValid(col))
+            return undefined;
+        return this.valueAt(row, col);
     };
     Grid.prototype.insert = function (value, row, col) {
         var sRow = this.sanitizeRow(row);
@@ -108,6 +110,23 @@ var Grid = /** @class */ (function () {
             result.push(this.getRow(i));
         }
         return result;
+    };
+    Grid.prototype.getNeighbours = function (row, col) {
+        var sRow = this.sanitizeRow(row);
+        var sCol = this.sanitizeCol(col);
+        var resultUnfiltered = [];
+        // Col left of cell
+        resultUnfiltered.push(this.valueAtOrUndefined(row + 1, col - 1));
+        resultUnfiltered.push(this.valueAtOrUndefined(row, col - 1));
+        resultUnfiltered.push(this.valueAtOrUndefined(row - 1, col - 1));
+        // Col containing cell
+        resultUnfiltered.push(this.valueAtOrUndefined(row + 1, col));
+        resultUnfiltered.push(this.valueAtOrUndefined(row - 1, col));
+        // Col right of cell
+        resultUnfiltered.push(this.valueAtOrUndefined(row + 1, col + 1));
+        resultUnfiltered.push(this.valueAtOrUndefined(row, col + 1));
+        resultUnfiltered.push(this.valueAtOrUndefined(row - 1, col + 1));
+        return resultUnfiltered.filter(function (value) { return (value !== undefined) ? true : false; });
     };
     Grid.prototype.toArray = function () {
         var result = [];
