@@ -2,8 +2,8 @@ export class Grid <T> {
 	private cells: T[];
 	private rows: number;
 	private cols: number;
-	private wrapRows: boolean;
-	private wrapCols: boolean;
+	private _wrapRows: boolean;
+	private _wrapCols: boolean;
 
 	constructor(rows: number, cols: number){
 		if(rows == undefined) throw new Error('Number of rows can\'t be undefined.');
@@ -110,5 +110,18 @@ export class Grid <T> {
 
 		const arrpos = this.arrayPosition(sRow, sCol);
 		this.cells[arrpos] = value;
+	}
+
+	public get wrapRows(): boolean{
+		return this._wrapRows;
+	}
+	public get wrapCols(): boolean{
+		return this._wrapCols;
+	}
+	public set wrapRows(val: boolean){
+		this._wrapRows = val;
+	}
+	public set wrapCols(val: boolean){
+		this._wrapCols = val;
 	}
 }
