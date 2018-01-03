@@ -1,7 +1,7 @@
 export class Grid <T> {
 	private cells: T[];
-	private rows: number;
-	private cols: number;
+	private _rows: number;
+	private _cols: number;
 	private _wrapRows: boolean;
 	private _wrapCols: boolean;
 
@@ -11,8 +11,8 @@ export class Grid <T> {
 		if(rows < 1) throw new Error('Number of rows must be >1');
 		if(cols < 1) throw new Error('Number of cols must be >1');
 
-		this.rows = rows;
-		this.cols = cols;
+		this._rows = rows;
+		this._cols = cols;
 		const arrsize = rows * cols;
 		this.cells = new Array(arrsize);
 	}
@@ -112,6 +112,43 @@ export class Grid <T> {
 		this.cells[arrpos] = value;
 	}
 
+	public getCols(): Array<Array<T>>{
+		const result = [];
+		for(let i = 0; i < this.cols; i++){
+			result.push(this.getCol(i));
+		}
+		return result;
+	}
+
+	public getRows(): Array<Array<T>>{
+		const result = [];
+		for(let i = 0; i < this.rows; i++){
+			result.push(this.getRow(i));
+		}
+		return result;
+	}
+
+	public toArray(): T[]{
+		const result = [];
+		for(let val of this.cells){
+			result.push(val);
+		}
+		return result;
+	}
+
+	public static fromArray<T>(array: T[], rows: number, cols: number): Grid<T>{
+		const result = new Grid<T>(rows, cols);
+
+		for(let i = 0; i < array.length; i++){
+			//i = row * this.cols + col;
+			const row = Math.round(i / rows);
+			const col = i % rows;
+			result.insert(array[i], row, col);
+		}
+
+		return result;
+	}
+
 	public get wrapRows(): boolean{
 		return this._wrapRows;
 	}
@@ -123,5 +160,13 @@ export class Grid <T> {
 	}
 	public set wrapCols(val: boolean){
 		this._wrapCols = val;
+	}
+
+	public get rows(){
+		return this._rows;
+	}
+
+	public get cols(){
+		return this._cols;
 	}
 }
