@@ -2,7 +2,7 @@
   "name": "2dgrid",
   "version": "1.0.0",
   "description": "A 2d grid library",
-  "main": "./dist/bundle.js",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"no tests defined\""
   },
