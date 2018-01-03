@@ -1,0 +1,12 @@
+{
+  "name": "2dgrid",
+  "version": "1.0.0",
+  "description": "A 2d grid library",
+  "main": "./dist/bundle.js",
+  "scripts": {
+    "test": "echo \"no tests defined\""
+  },
+  "author": "Alexander Schramm",
+  "license": "MIT",
+  "types": "./dist/index.d.ts"
+}

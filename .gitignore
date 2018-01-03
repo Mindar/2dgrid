@@ -1,0 +1,4 @@
+node_modules/
+
+# Uncomment when more than 1 dev is working on the project
+# .vscode/
