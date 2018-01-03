@@ -1,9 +1,9 @@
 export declare class Grid<T> {
     private cells;
-    private rows;
-    private cols;
-    private wrapRows;
-    private wrapCols;
+    private _rows;
+    private _cols;
+    private _wrapRows;
+    private _wrapCols;
     constructor(rows: number, cols: number);
     private arrayPosition(row, col);
     getRow(row: number): T[];
@@ -15,4 +15,12 @@ export declare class Grid<T> {
     valueAt(row: number, col: number): T;
     isEmtpy(row: number, col: number): boolean;
     insert(value: T, row: number, col: number): void;
+    getCols(): Array<Array<T>>;
+    getRows(): Array<Array<T>>;
+    toArray(): T[];
+    static fromArray<T>(array: T[], rows: number, cols: number): Grid<T>;
+    wrapRows: boolean;
+    wrapCols: boolean;
+    readonly rows: number;
+    readonly cols: number;
 }
