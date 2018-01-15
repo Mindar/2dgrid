@@ -1,6 +1,6 @@
 {
   "name": "2dgrid",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "A 2d grid library",
   "main": "./dist/index.js",
   "scripts": {

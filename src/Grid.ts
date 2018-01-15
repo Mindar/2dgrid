@@ -161,20 +161,27 @@ export class Grid <T> {
 
 	public toArray(): T[]{
 		const result = [];
-		for(let val of this.cells){
-			result.push(val);
+
+		for(let row = 0; row < this.rows; row++){
+			for(let col = 0; col < this.cols; col++){
+				const arrpos = this.arrayPosition(row, col);
+
+				result[arrpos] = this.cells[arrpos];
+			}
 		}
+
 		return result;
 	}
 
 	public static fromArray<T>(array: T[], rows: number, cols: number): Grid<T>{
 		const result = new Grid<T>(rows, cols);
 
-		for(let i = 0; i < array.length; i++){
-			//i = row * this.cols + col;
-			const row = Math.round(i / rows);
-			const col = i % rows;
-			result.insert(array[i], row, col);
+		for(let row = 0; row < rows; row++){
+			for(let col = 0; col < cols; col++){
+				const arrpos = row * cols + col;
+
+				result.insert(array[arrpos], row, col);
+			}
 		}
 
 		return result;
