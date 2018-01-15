@@ -135,19 +135,21 @@ var Grid = /** @class */ (function () {
     };
     Grid.prototype.toArray = function () {
         var result = [];
-        for (var _i = 0, _a = this.cells; _i < _a.length; _i++) {
-            var val = _a[_i];
-            result.push(val);
+        for (var row = 0; row < this.rows; row++) {
+            for (var col = 0; col < this.cols; col++) {
+                var arrpos = this.arrayPosition(row, col);
+                result[arrpos] = this.cells[arrpos];
+            }
         }
         return result;
     };
     Grid.fromArray = function (array, rows, cols) {
         var result = new Grid(rows, cols);
-        for (var i = 0; i < array.length; i++) {
-            //i = row * this.cols + col;
-            var row = Math.round(i / rows);
-            var col = i % rows;
-            result.insert(array[i], row, col);
+        for (var row = 0; row < rows; row++) {
+            for (var col = 0; col < cols; col++) {
+                var arrpos = row * cols + col;
+                result.insert(array[arrpos], row, col);
+            }
         }
         return result;
     };
